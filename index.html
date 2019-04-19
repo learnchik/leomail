@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Форма с вложением и отправкой через AJAX и PHPMAILER</title>
+
+  <!-- Подключение скриптов -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+</head>
+<body>
+
+  <div class="form-wrp">
+    <h1>Заказать услугу</h1>
+    <form id="form" class="form-group" enctype="multipart/form-data" method="post">
+      <!-- Hidden Required Fields -->
+      <input type="hidden" name="form_subject" value="Заказать услугу">
+      <!-- END Hidden Required Fields -->
+      <input type="text" name="Имя" class="input-text" placeholder="Ваше имя..." required><br>
+      <input type="text" name="Компания" class="input-text" placeholder="Наименование компании..." required><br>
+      <input type="text" name="Телефон" class="input-phone input-text" placeholder="Ваш телефон..." required><br>
+      <input type="email" name="E-mail" class="input-text" placeholder="Ваш e-mail..."><br>
+      <select name="Услуга" class="select-service" id="select-service">
+        <option>Раскрой листового металла</option>
+        <option>Установка и пуско-наладка оборудования</option>
+        <option>Диагностика и ремонт оборудования</option>
+        <option>Подбор запчастей и расходных материалов</option>
+      </select>
+      <textarea rows="10" cols="55" name="Комментарий" class="input-textarea"></textarea><br>
+      <input type="file" name="userfile" class="input-file" accept="application/rtf,application/pdf,text/plain,application/msword,application/zip,application/excel,image/tiff,image/jpeg,image/png,image/gif"><br>
+      <input type="checkbox" name="Согласие" required> Даю согласие на обработку своих персональных данных
+      <input type="submit" class="btn button" value="Отправить" />
+    </form>
+    <script>
+      $(function(){
+        'use strict';
+        $('form').on('submit', function(e) {
+          e.preventDefault();
+          var fd = new FormData(this);
+          var th = $(this);
+          $.ajax({
+            url: 'send.php', // Путь до файла
+            type: 'POST',
+            contentType: false, 
+            processData: false, 
+            data: fd,
+            success: function(msg){
+              if(msg == 'ok') {
+                alert("Ваше сообщение отправлено успешно!");
+                // $(".button").val("Отправлено"); 
+                setTimeout(function() {
+                  // Done Functions
+                  th.trigger("reset");
+                }, 1000);
+              } else {
+                $(".button").val("Ошибка");
+                setTimeout(function() {
+                  $(".button").val("Отправить");
+                }, 3000);
+              }
+            }
+          });
+        });
+      });
+    </script>
+  </div>
+  
+</body>
+</html>

@@ -1,0 +1,7 @@
+В эту папку необходимо скачать последнюю версию PHPMailer https://github.com/PHPMailer/PHPMailer
+
+Внимание! Нужна только следующие файлы из папки "src":
+- Exception.php
+- PHPMailer.php
+- SMTP.php
+
