@@ -1,5 +1,5 @@
 # leomail
-<h1>Отправка формы с вложениями (PHPMailer + AJAX)</h1>
+<h2>Отправка формы с вложениями (PHPMailer + AJAX)</h2>
 
 <p>1. Скачиваем в папку phpmailer последнюю версию PHPMailer https://github.com/PHPMailer/PHPMailer. Нужно только содержимое папки "src".</p>
 <p>2. В файле send.php настраиваем переменные по образцу:</p>
